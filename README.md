@@ -1,5 +1,5 @@
 # sesac_ot
 
-Hello, World
+Hello
 
 World

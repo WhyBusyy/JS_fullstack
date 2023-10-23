@@ -1,0 +1,27 @@
+.myclass1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1em;
+    font-weight: bold;
+    color: brown;
+    width: 400px;
+    height: 50px;
+    background-color: rgb(248, 241, 223);
+    border-width: 3px;
+    border-style: dotted;
+}
+
+p.myclass2 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1em;
+    font-weight: bold;
+    color: rgb(59, 130, 229);
+    width: 600px;
+    height: 30px;
+    background-color: rgb(206, 255, 248);
+    border-width: 3px;
+    border-style: dashed;
+}
+
+#myid1 {
+    color: blueviolet;
+}

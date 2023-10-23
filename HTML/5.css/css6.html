@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        ul#secondul li::before {
+            content: "x";
+            width: 10px;
+            margin-right: 5px;
+        }
+
+        .element::before {
+            content: "👉🏻";
+        }
+
+        .element::after {
+            content: "@@";
+            color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul id="firstul">
+            <li class="element">아메리카노</li>
+            <ul id="secondul">
+                <li>아아</li>
+                <li>뜨아</li>
+            </ul>
+            <li class="element">카푸치노</li>
+            <li class="element">에스프레소</li>
+        </ul>
+    </div>
+</body>
+
+</html>

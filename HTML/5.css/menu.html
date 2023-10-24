@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        header {
+            background-color: black;
+            color: white;
+            padding: 5px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .submenu {
+            display: none;
+        }
+
+        ul li:hover .submenu {
+            display: block;
+            position: absolute;
+            background-color: black;
+            padding-top: 5px;
+        }
+
+        .submenu ul {
+            display: block;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+        }
+
+        .submenu ul li {
+            display: block;
+        }
+
+        .submenu ul li a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">홈</a></li>
+                <li><a href="#">메뉴1</a>
+                    <div class="submenu">
+                        <ul>
+                            <li><a href="#">메뉴1-1</a></li>
+                            <li><a href="#">메뉴1-2</a></li>
+                            <li><a href="#">메뉴1-3</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="#">메뉴2</a>
+                    <div class="submenu">
+                        <ul>
+                            <li><a href="#">메뉴2-1</a></li>
+                            <li><a href="#">메뉴2-2</a></li>
+                            <li><a href="#">메뉴2-3</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="#">메뉴3</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>페이지 제목</h1>
+        <p>페이지 내용페이지 내용페이지 내용페이지 내용페이지 내용페이지 내용페이지 내용페이지 내용</p>
+    </main>
+</body>
+
+</html>

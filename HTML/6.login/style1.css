@@ -1,0 +1,84 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 세로 중앙 정렬을 위한 추가 */
+    background: linear-gradient(3000deg, rgb(205, 205, 205), rgb(48, 48, 48));
+    height: 105vh;
+    /* 전체 화면 높이 설정 */
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+}
+
+.main {
+    padding-bottom: 150px;
+}
+
+.signup {
+    border: 10px solid white;
+    padding: 10px 50px 10px 50px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 5px;
+    box-shadow: 2px 2px 5px black;
+}
+
+label {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 70px;
+    padding-bottom: 70px;
+}
+
+input {
+    display: inline-block;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+button {
+    font-size: 18px;
+    padding: 5px 70px 5px 70px;
+    margin-top: 20px;
+    background-color: rgb(205, 205, 205);
+    font-weight: 200;
+    color: white;
+    border-style: none;
+    border-radius: 3px;
+}
+
+button:hover {
+    background-color: rgb(174, 174, 174);
+}
+
+.login {
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+}
+
+#login {
+    padding-bottom: 10px;
+}
+
+.login:hover .logintap {
+    opacity: 1;
+}
+
+.logintap {
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-35%);
+    background-color: white;
+    transition: opacity 0.15s ease-out;
+    padding: 10px 68px 20px 68px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+}
+
+#login2 {
+    padding-bottom: 20px;
+}

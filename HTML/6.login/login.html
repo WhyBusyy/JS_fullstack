@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>My Title</title>
-  <link rel="stylesheet" type="text/css" href="style1.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="style1.css">
 </head>
+
 <body>
-	<div class="main">  	
-		<input type="checkbox" id="chk" aria-hidden="true">
+	<div class="main">
+		<!-- <input type="checkbox" id="chk" aria-hidden="true"> -->
 
-			<div class="signup">
-				<form>
-					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="txt" placeholder="User name" required="">
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
-					<button>Sign up</button>
-				</form>
-			</div>
-
-			<div class="login">
-				<form>
-					<label for="chk" aria-hidden="true">Login</label>
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
+		<div class="signup">
+			<form>
+				<label for="chk" aria-hidden="true">Sign up</label><br>
+				<input type="text" name="txt" placeholder="User name" required=""><br>
+				<input type="email" name="email" placeholder="Email" required=""><br>
+				<input type="password" name="pswd" placeholder="Password" required=""><br>
+				<button>Sign up</button>
+			</form>
+		</div>
+		<div class="login">
+			<form>
+				<label for="chk" aria-hidden="true" id="login">Login</label><br>
+				<div class="logintap">
+					<label for="chk" aria-hidden="true" id="login2">Login</label><br>
+					<input type="email" name="email" placeholder="Email" required=""><br>
+					<input type="password" name="pswd" placeholder="Password" required=""><br>
 					<button>Login</button>
 				</form>
 			</div>
+		</div>
 	</div>
 </body>
+
 </html>

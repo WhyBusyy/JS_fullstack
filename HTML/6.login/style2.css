@@ -1,0 +1,62 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 세로 중앙 정렬을 위한 추가 */
+    height: 105vh;
+    /* 전체 화면 높이 설정 */
+    margin: 0;
+    font-family: 'Pixelify Sans', sans-serif;
+    background-image: url(../images/_.jpeg);
+}
+
+.main {
+    background-color: rgba(218, 217, 203, 0.244);
+    border-radius: 2px;
+    box-shadow: 2px 2px 5px black;
+    color: rgb(220, 205, 119);
+    padding: 20px 0px 50px 0px;
+}
+
+.signup {
+    padding: 10px 50px 10px 50px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+label {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 70px;
+    padding-bottom: 70px;
+}
+
+input {
+    display: inline-block;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 18px;
+    margin-bottom: 15px;
+    border-style: inset;
+    border-color: rgb(191, 192, 126);
+}
+
+button {
+    font-size: 18px;
+    padding: 5px 70px 5px 70px;
+    margin-top: 20px;
+    background-color: rgb(161, 159, 110);
+    font-family: 'Pixelify Sans', sans-serif;
+    font-weight: 400;
+    color: white;
+    border-style: none;
+    border-radius: 2px;
+}
+
+button:hover {
+    background-color: rgb(115, 114, 79);
+}
+
+.login {
+    display: none;
+}

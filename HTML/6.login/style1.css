@@ -4,6 +4,7 @@ body {
     align-items: center;
     /* 세로 중앙 정렬을 위한 추가 */
     background: linear-gradient(3000deg, rgb(205, 205, 205), rgb(48, 48, 48));
+    background-size: cover;
     height: 105vh;
     /* 전체 화면 높이 설정 */
     margin: 0;

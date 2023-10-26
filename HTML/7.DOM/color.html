@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <p id="myText">이 곳에 글자를 입력하시오</p>
+    <button onclick="changeColorRed()">Red</button>
+    <button onclick="changeColorBlue()">Blue</button>
+    <button onclick="changeColor()">색상토글</button>
+    <button onclick="addElement()">내용 추가</button> <!-- div 생성 -->
+    <button onclick="rmElement()">내용 삭제</button> <!-- div 제거 -->
+    <button onclick="myfunc()">버튼</button>
+
+    <script>
+        function myfunc() {
+            console.log(window.innerWidth, window.innerHeight)
+            console.log(screen.width, screen.height)
+        }
+
+        function addElement() {
+            var div = document.createElement("div");
+            div.textContent = "새로운 내용";
+            div.id = "myDiv"; // div에 고유한 id 할당
+            document.body.appendChild(div); // body에 div 추가
+        }
+
+        function rmElement() {
+            var div = document.getElementById("myDiv"); // id를 통해 div 가져오기
+            if (div) {
+                div.remove(); // div 삭제
+            }
+        }
+
+        function changeColorRed() {
+            var textElement = document.getElementById("myText");
+            textElement.style.color = "red";
+        }
+
+        function changeColorBlue() {
+            var textElement = document.getElementById("myText");
+            textElement.style.color = "blue";
+        }
+
+        function changeColor() {
+            var textElement = document.getElementById("myText");
+            var currentColor = textElement.style.color;
+            console.log(currentColor);
+            textElement.style.color = "red";
+            if (currentColor === "red") {
+                textElement.style.color = "blue";
+            } else if (currentColor === "blue") {
+                textElement.style.color = "red";
+            }
+        }
+
+    </script>
+</body>
+
+</html>

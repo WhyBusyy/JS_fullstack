@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        div {
+            width: 500px;
+            height: 300px;
+        }
+
+        #First {
+            background-color: blue;
+            z-index: 1;
+            position: absolute;
+        }
+
+        #Second {
+            background-color: green;
+            z-index: 2;
+            position: absolute;
+            top: 300px;
+            transition: top 0.5s, height 0.5s; /* 애니메이션 효과 추가 */
+        }
+
+        #Third {
+            background-color: greenyellow;
+            z-index: 0;
+            position: absolute;
+            top: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="First">상단내용</div>
+    <div id="Second">하단내용</div>
+    <div id="Third"></div>
+    <script>
+        var secondDiv = document.getElementById('Second');
+        var firstDiv = document.getElementById('First');
+
+        secondDiv.addEventListener('click', function () {
+            if (secondDiv.style.height === '300px') {
+                secondDiv.style.height = '600px';
+                secondDiv.style.top = '0';
+            } else {
+                secondDiv.style.height = '300px';
+                secondDiv.style.top = '300px';
+            }
+        });
+    </script>
+</body>
+
+</html>

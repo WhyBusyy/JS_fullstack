@@ -1,7 +1,6 @@
 // 1. Date
 const today = Date();
 console.log(today);
-
 // const today = new Date();
 // console.log(today);
 
@@ -30,14 +29,7 @@ function max_numbers(nums) {
         }
     }
     return num;
-// 이게 for 구문으로 만들어진 것이 ^ 위에 함수
- // 1.if 0번이 1번보다 크면 0번을 반환
- // 2.else if 반환된 값이 2번보다 크면 반환된 값을 반환
- // 3.else if 반환된 값이 3번보다 크면 반환된 값을 반환
- // 4.else if 반환된 값이 4번보다 크면 반환된 값을 반환
- // 5.else if 반환된 값이 5번보다 크면 반환된 값을 반환
 }
-
 max_num = max_numbers(numbers);
 console.log(max_num);
 

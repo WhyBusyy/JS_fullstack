@@ -9,14 +9,12 @@ import { Sin1 } from "./sin.js";
 import { Cos1 } from "./cos.js";
 import { Tan1 } from "./tan.js";
 
+let stdCalculator = new Operator();
 let objectSin = new Sin1(1, 2);
-console.log(objectSin.sin());
-
 let objectCos = new Cos1(2, 3);
-console.log(objectCos.cos());
-
 let objectTan = new Tan1(3, 4);
-console.log(objectTan.tan());
+
+//=====================================
 
 import readline from "readline";
 
@@ -30,11 +28,11 @@ console.log("1. Engnineering");
 console.log("2. Standard");
 console.log("3. Programmer");
 rl.question("Enter the mode (1/2/3): ", (input) => {
-  const num = parseInt(input);
+  const num = parseFloat(input);
 
   if (!isNaN(num) && num === 2) {
     rl.question("Enter first number: ", (input) => {
-      const firstNumber = parseInt(input);
+      const firstNumber = parseFloat(input);
 
       if (!isNaN(firstNumber)) {
         rl.question("Enter operator (+, -, *, /): ", (input) => {
@@ -47,22 +45,22 @@ rl.question("Enter the mode (1/2/3): ", (input) => {
             inputOperator === "/"
           ) {
             rl.question("Enter second number: ", (input) => {
-              const secondNumber = parseInt(input);
+              const secondNumber = parseFloat(input);
 
               if (!isNaN(secondNumber)) {
                 let result;
                 switch (inputOperator) {
                   case "+":
-                    result = firstNumber + secondNumber;
+                    result = stdCalculator.add(firstNumber, secondNumber);
                     break;
                   case "-":
-                    result = firstNumber - secondNumber;
+                    result = stdCalculator.sub(firstNumber, secondNumber);
                     break;
                   case "*":
-                    result = firstNumber * secondNumber;
+                    result = stdCalculator.mul(firstNumber, secondNumber);
                     break;
                   case "/":
-                    result = firstNumber / secondNumber;
+                    result = stdCalculator.div(firstNumber, secondNumber);
                     break;
                 }
                 console.log("Result: ", result);

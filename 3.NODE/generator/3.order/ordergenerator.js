@@ -45,30 +45,44 @@ function randomDate() {
 
 //=====================
 
-function getStoreId() {
+let storeRawData = "";
+
+function getStoreData() {
   try {
-    let num = Math.floor(Math.random() * 100);
     const storeData = fs.readFileSync("../2.store/Store.csv", "utf8");
-    const storeSplit = storeData.split("\n")[num];
-    const storeId = storeSplit.split(",")[0];
-    return storeId;
+    return storeRawData = storeData;
   } catch (err) {
     console.error("파일을 읽는데 오류가 발생했습니다.", err);
   }
 }
+getStoreData();
+
+function getStoreId() {
+    let num = Math.floor(Math.random() * storeRawData.split("\n").length);
+    const storeSplit = storeRawData.split("\n")[num];
+    const storeId = storeSplit.split(",")[0];
+    return storeId;
+}
 
 //=================================
 
-function getUserId() {
+let userRawData = "";
+
+function getUserData() {
   try {
-    let num = Math.floor(Math.random() * 100);
     const userData = fs.readFileSync("../1.user/User.csv", "utf8");
-    const userSplit = userData.split("\n")[num];
-    const userId = userSplit.split(",")[0];
-    return userId;
+    return userRawData = userData;
   } catch (err) {
     console.error("파일을 읽는데 오류가 발생했습니다.", err);
   }
+}
+getUserData();
+
+function getUserId() {
+    let num = Math.floor(Math.random() * userRawData.split("\n").length);
+    const userSplit = userRawData.split("\n")[num];
+    const userId = userSplit.split(",")[0];
+    return userId;
 }
 
 //==========================

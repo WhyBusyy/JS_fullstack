@@ -48,9 +48,9 @@ function generateBirth() {
         day = "0" + day
     }
 
-    return userAge, `${year}-${month}-${day}`;
+    return [userAge, `${year}-${month}-${day}`];
 }
-// generateBirth();
+// console.log(generateBirth());
 
 //=================================
 

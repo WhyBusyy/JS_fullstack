@@ -1,0 +1,21 @@
+{
+  "Coffee": [
+    "Espresso",
+    "Americano",
+    "Cappuccino",
+    "Latte",
+    "Mocha",
+    "Macchiato",
+    "Flat White",
+    "Frappuccino",
+    "Iced Coffee",
+    "Cold Brew",
+    "Affogato",
+    "Irish Coffee"
+  ],
+  "Beverage": ["Chai Latte", "Green Tea Latte", "Hot Chocolate"],
+  "Dessert": ["Muffin", "Croissant", "Bagel", "Sandwich"],
+  "coffeePrice": [3500, 5000, 4500, 4000],
+  "beveragePrice": [5000, 5500, 6000, 6500],
+  "dessertPrice": [8000, 7500, 8500, 9000]
+}

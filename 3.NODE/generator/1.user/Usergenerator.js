@@ -14,12 +14,6 @@ function generateuserName(arr) {
 //=================================
 
 function generateNameAndGender() {
-    // const gender = Math.floor(Math.random()*2);
-    // if (gender == 1) {
-    //     return 'Male'
-    // } else {
-    //     return 'Female'
-    // }
     const gender = Math.random() < 0.4 ? "Male" : "Female"; // 비중조절 가능 0.n
     
     if (gender === "Male") {

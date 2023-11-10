@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import * as fs from "node:fs";
 import { surname, maleFirstname, femaleFirstname, stateData } from "./UserData.js";
-import { generateDate, selectRandomIndex } from "../functions.js";
+import { generateDate, selectRandomIndex, generateAddress } from "../functions.js";
 
 function generateNameAndGender() {
   const gender = Math.random() < 0.4 ? "Male" : "Female"; // 비중조절 가능 0.n
@@ -26,18 +26,6 @@ function generateBirth() {
   const userAge = nowDay.getFullYear() - year + 1;
 
   return [userAge, `${year}-${date}`];
-}
-
-function generateAddress() {
-  const selecetedStateData =
-    stateData[Math.floor(Math.random() * stateData.length)];
-  const selectedState = selecetedStateData.state;
-  const selectedCity =
-    selecetedStateData.cities[
-      Math.floor(Math.random() * selecetedStateData.cities.length)
-    ];
-
-  return `${selectedState} ${selectedCity}`;
 }
 
 const data = [];

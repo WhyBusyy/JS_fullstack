@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import * as fs from 'node:fs'
-
-//=================================
+import { stateData } from "../1.user/UserData";
+import { selectRandomIndex, generateAddress } from "../functions.js";
 
 const brand = ['스타벅스','이디야','커피빈','블루보틀','파스쿠치','빽다방'];
 const location = [
@@ -18,17 +18,7 @@ function generateBrandStore(arr, arr2) {
     return arr[brandRandomNumber] + " " + arr2[storeRandomNumber];
 }
 
-//=================================
-
-const stateName = [
-    "서울특별시", "부산광역시", "대구광역시", "인천광역시", "광주광역시",
-    "대전광역시", "울산광역시", "세종특별자치시", "수원시", "용인시",
-    "안성시", "전주시", "여수시", "목포시", "포항시",
-    "경주시", "제주특별시"
-];
-const cityName = ['강남구', '강서구', '강동구', '강북구', '남구', '서구', '북구', '동구', '진구'];
-
-function generateAddress() {
+function generateStoreAddress() {
     const stateIndex = Math.floor(Math.random()*stateName.length);
     const selectedState = stateName[stateIndex];
     const cityIndex = Math.floor(Math.random()*cityName.length);
@@ -56,7 +46,7 @@ for (let i = 0; i < 100; i++) {
 
     const storeId = uuidv4();
     const brandName = storeName.split(' ')[0];
-    const storeAddress = generateAddress();
+    const storeAddress = generateStoreAddress();
 
     data.push(`${storeId},${storeName},${brandName},${storeAddress}`);
 }

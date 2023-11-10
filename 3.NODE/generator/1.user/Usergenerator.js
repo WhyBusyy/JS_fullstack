@@ -54,7 +54,7 @@ for (let i = 0; i < 1000; i++) {
 const csvData = data.join("\n");
 
 // 파일에 데이터를 씁니다.
-fs.writeFile("User2.csv", csvData, (err) => {
+fs.writeFile("User.csv", csvData, (err) => {
   if (err) throw err;
   console.log("CSV 파일이 성공적으로 생성되었습니다.");
 });

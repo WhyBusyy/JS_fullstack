@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import * as fs from "node:fs";
+import { selectRandomIndex } from "../functions.js";
 
-//=================================
 const category = {
     Coffee:[
         "Espresso",
@@ -30,18 +30,9 @@ const category = {
         ],
 };
 
-//===============================
 const coffeePrice = [3500, 5000, 4500, 4000];
 const beveragePrice = [5000, 5500, 6000, 6500];
 const dessertPrice = [8000, 7500, 8500, 9000];
-
-function priceSet(arr) {
-    const priceRandom = (Math.floor(Math.random()*arr.length));
-
-    return arr[priceRandom];
-}
-
-//===============================
 
 const data = [];
 for (let key in category) {
@@ -52,18 +43,16 @@ for (let key in category) {
         let itemPrice = "price";
 
         if(categoryOfItem == 'Coffee'){
-            itemPrice = priceSet(coffeePrice);
+            itemPrice = selectRandomIndex(coffeePrice);
         } else if(categoryOfItem == 'Beverage') {
-            itemPrice = priceSet(beveragePrice);
+            itemPrice = selectRandomIndex(beveragePrice);
         } else {
-            itemPrice = priceSet(dessertPrice);
+            itemPrice = selectRandomIndex(dessertPrice);
         };
 
         data.push(`${itemId},${itemName},${categoryOfItem},${itemPrice}`);
     }
 }
-
-//===============================
 
 const csvData = data.join('\n');
 

@@ -13,7 +13,7 @@ const server = http.createServer(async (req, res) => {
 
   try {
     if (req.method === "GET") {
-        const parsedURL = url.parse(req.url, true); // URL 파싱
+        const parsedURL = url.parse(req.url); // URL 파싱
         const filePath = path.join("./", parsedURL.pathname); // 파싱한 URL에서 파일경로 읽어오기
       if (req.url === "/") {
         const data = await fs.readFile("./index.html");
@@ -27,13 +27,16 @@ const server = http.createServer(async (req, res) => {
       //숙제1. 이미지 파일 읽기
       else if (req.url === "/images/") {
         const data = await fs.readFile(filePath); // 읽어온 파일 경로를 변수로 설정
+        console.log(filePath);
         res.writeHead(SUCCESS, { "Content-Type": "image/jpeg" });
         res.end(data);
       } 
       //숙제2. 확장자에 따라 파일 읽기
       else if (req.method === "GET") {
         const data = await fs.readFile(filePath); // 읽어온 파일 경로
+        console.log(filePath);
         const readExtention = path.extname(filePath); // 파일 경로에서 확장자만 변수로 설정
+        console.log(readExtention);
         // 읽어온 확장자 변수에 따라 Content-Type에 값을 할당
         let contentType = "text/plain";
         if (readExtention === ".html") {

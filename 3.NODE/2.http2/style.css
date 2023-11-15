@@ -7,7 +7,8 @@ a {
     text-decoration: none;
     color: rgb(214, 28, 28);
     font-weight: Bold;
-    font-size: 50px;
+    font-size: 20px;
+    padding: 0 10px;
 }
 
 a:hover {
@@ -15,11 +16,18 @@ a:hover {
 }
 
 h1 {
-    font-size: 50px ;
+    font-size: 30px ;
     color: white;
 }
 
 p {
-    font-size: 30px;
+    font-size: 20px;
+}
 
+#userTable div{
+    font-size: 18px;
+}
+
+#userTable div button {
+    margin: 1px 3px;
 }

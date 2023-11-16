@@ -74,16 +74,11 @@ const server = http.createServer(async (req, res) => {
         const formData = JSON.parse(body);
         console.log("파싱한후?", formData);
 
-        // const username = formData.name;
-        // console.log("사용자이름은?", username);
+        const username = formData.name;
+        console.log("사용자이름은?", username);
 
-        // users[username] = username;
-        // 새로운 사용자를 추가하고 키로 현재 시간을 사용
-        const userID = Date.now();
-        users[userID] = {
-          username: formData.name,
-          userID: userID,
-        };
+        users[Date.now()] = username;
+        //새로운 사용자를 추가하고 키로 현재 시간을 사용
         console.log("최종객체:", users);
       });
       //결과 res를 주는 코드
@@ -100,11 +95,18 @@ const server = http.createServer(async (req, res) => {
           // 도착한 데이터 기반 프로세싱
           console.log("PUT body:", body);
           // 수정 코드 작성
-          const formData = parse(body);
-          users[key] = formData.name;
+          const formData = JSON.parse(body);
+          console.log("파싱한후?", formData);
+  
+          const username = formData.name;
+          console.log("사용자이름은?", username);
+  
+          users[key] = username;
+          console.log("최종객체:", users);
         });
       }
       //요청을 수정할때
+      res.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
       res.end("수정성공");
     } else if (req.method === "DELETE") {
       if (req.url.startsWith("/user/")) {

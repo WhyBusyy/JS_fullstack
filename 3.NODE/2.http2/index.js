@@ -1,6 +1,9 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("form");
   const username = document.getElementById("username");
+
+  //페이지 최초 로딩 시 백엔드에 사용자 데이터 요청
+  await updateTable();
 
   form.addEventListener("submit", async (ev) => {
     //폼의 본연 기능인 다른 페이지로 요청하는 것을 못하게 할 것....
@@ -25,12 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (response.ok) {
         alert("등록 성공");
         //등록 성공시 화면 컴포넌트 추가
-        if (document.getElementById("userTable").innerHTML.length === 0) {
-          updateTable();
-        } else {
-          document.getElementById("userTable").innerHTML = "";
-          updateTable();
-        }
+        updateTable();
       } else {
         const errorMessage = await response.text();
         alert("등록 실패:", errorMessage);
@@ -53,24 +51,65 @@ async function updateTable() {
 function displayUsers(users) {
   // users에는 json포맷의 사용자 데이터를 전부 가지고 있음..
   const userTable = document.getElementById("userTable");
+  userTable.innerHTML = "";
 
   if (Object.keys(users).length === 0) {
     const messageRow = document.createElement("div");
     messageRow.textContent = "등록된 사용자가 없습니다.";
     userTable.appendChild(messageRow);
-  } else if (Object.keys(users).length > 0) {
+  } else {
     for (const key in users) {
       const row = document.createElement("div");
-      row.innerHTML = `ID: ${key}, Name: ${users[key].username}`;
+      row.innerHTML = `<strong>ID:</strong> ${key}, <strong>Name:</strong> ${users[key]}
+      <button onclick = editUser(${key})>수정</button>
+      <button onclick = deleteUser(${key})>삭제</button>`;
       userTable.appendChild(row);
-      const putBtn = document.createElement("button");
-      putBtn.id = "modify";
-      putBtn.innerHTML = `수정`;
-      row.appendChild(putBtn);
-      const delBtn = document.createElement("button");
-      delBtn.id = "delete";
-      delBtn.innerHTML = `삭제`;
-      row.appendChild(delBtn);
     }
+  }
+}
+
+async function editUser(userID) {
+    const newName = window.prompt('수정할 이름을 입력하세요.', '');
+    if (newName) {
+        const response = await fetch(`/user/${userID}`, {
+            method: "PUT",
+            header: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name : newName }),
+          });
+      
+          if (response.ok) {
+            //화면갱신
+            alert("수정 성공");
+            username.value = ''; //수정 완료시 인풋 텍스트 초기화
+            await updateTable();
+          } else {
+            const errorMessage = await response.text();
+            throw new Error(`수정 실패: ${errorMessage}`);
+          }
+      } else {
+        alert('수정 취소');
+      }
+}
+
+async function deleteUser(userID) {
+  //삭제 요청 확인
+  const confirmDelete = confirm(`[${userID}] 정말 삭제하시렵니까?`);
+  if (confirmDelete) {
+    //삭제 요청 수행
+    const response = await fetch(`/user/${userID}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      //화면갱신
+      username.value = ''; 
+      alert("삭제 성공");
+      await updateTable();
+    } else {
+      const errorMessage = await response.text();
+      throw new Error(`삭제실패: ${errorMessage}`);
+    }
+  } else {
+    alert('삭제 안하렵니다.');
   }
 }

@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    font-weight: bold;
+    background-color: rgb(200, 200, 200);
+}
+
+tbody {
+    overflow-y: auto;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 6px;
+    text-align: left;
+  }

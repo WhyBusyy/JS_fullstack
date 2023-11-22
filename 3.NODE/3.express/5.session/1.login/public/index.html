@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" href="/static/style1.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;700&family=Pixelify+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="/static/user.js" defer></script>
+</head>
+
+<body>
+    <div>
+        <nav>
+            <ul>
+            <li><a href="/"> HOME </a></li>
+            <li><a href="/"> LOGIN </a></li>
+            <li><a href="/profile"> PROFILE </a></li>
+            <li><a href="/logout"> LOGOUT </a></li>
+        </ul>
+        </nav>
+    </div>
+    <div id="signup">
+        <h1>LOGIN</h1>
+        <form id="logintap">
+            <label for="username" id="login2">ID</label>
+            <input type="text" name="username" placeholder="아이디를 입력하세요." id="ID" required><BR>
+            <label for="password">PW</label>
+            <input type="password" name="password" placeholder="비밀번호를 입력하세요." id="PW" required><BR>
+            <button type="button" onclick="login()">Login</button>
+        </form>
+    </div>
+
+    <div id="profile" style="display:none">
+        <h2>Welcome, <span id="usernameSpan"></span>님!</h2>
+        <button onclick="logout()">Logout</button>
+    </div>
+</body>
+
+</html>

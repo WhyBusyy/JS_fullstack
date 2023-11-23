@@ -1,0 +1,39 @@
+h2 {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+thead {
+    font-weight: bold;
+    background-color: rgb(238, 238, 238);
+}
+
+th {
+    border: 1px solid #b2b2b2;
+    padding: 6px;
+    text-align: center;
+}
+
+td {
+    border: 1px solid #b2b2b2;
+    padding: 6px;
+    text-align: center;
+}
+
+div {
+    text-align: center;
+}
+
+div a {
+    font-size: 13px;
+    text-decoration: none;
+    color: black;
+    background-color: #f2f2f2;
+    padding: 5px;
+    border: 1px solid #b2b2b2;
+}

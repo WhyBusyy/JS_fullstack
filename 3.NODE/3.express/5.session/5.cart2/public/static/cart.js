@@ -1,6 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   fetch("/cart")
-    .then((response) => response.json())
+    .then((response) => {
+    if (response.status === 200) {
+      loginStatus();
+      return response.json();
+    } else if (response.status === 401) {
+      console.log('로그인된 사용자 없음')
+      alert("로그인이 필요합니다.")
+      window.location.href = "/";
+    }
+  })
     .then((cart) => displayCart(cart));
 });
 
@@ -67,4 +76,24 @@ function removeAll(productId) {
     .catch((error) => {
       console.error(error);
     });
+}
+
+function loginStatus() {
+  fetch('/check-login')    // 백엔드 구현: 사용자 세션 있으면 username 반납
+  .then(response => response.json())
+  .then(data => {
+      if (data.username) {
+        document.getElementById("userLog").style.display = "block";
+        document.getElementById("username").innerText = data.username;
+      }
+    });
+}
+
+function logout() {
+  fetch('/logout')
+  .then(response => response.json())
+  .then(data => {
+      alert(data.message);
+      showLoginForm();
+  })
 }

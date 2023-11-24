@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/user.js" defer></script>
+</head>
+
+<body>
+    <div>
+        <nav>
+            <ul>
+            <li><a href="/"> HOME </a></li>
+            <li><a href="/myproduct"> PRODUCT </a></li>
+            <li><a href="/mycart"> CART </a></li>
+        </ul>
+        </nav>
+    </div>
+    <div id="userLog">
+        <ul>
+            <li><span id="username"></span>님</li>
+            <li><a href="/" onclick="logout()"> Logout </a></li>
+        </ul>
+    </div>
+    <div id="signup">
+        <h1>LOGIN</h1>
+        <form id="logintap">
+            <label for="username" id="login2">ID</label>
+            <input type="text" name="username" placeholder="아이디를 입력하세요." id="ID" required><BR>
+            <label for="password">PW</label>
+            <input type="password" name="password" placeholder="비밀번호를 입력하세요." id="PW" required><BR>
+            <button type="button" onclick="login()">Login</button>
+        </form>
+    </div>
+
+    <div id="profile" style="display:none">
+        <h2>Welcome, <span id="usernameSpan"></span>님!</h2>
+        <button onclick="logout()">Logout</button>
+    </div>
+</body>
+
+</html>

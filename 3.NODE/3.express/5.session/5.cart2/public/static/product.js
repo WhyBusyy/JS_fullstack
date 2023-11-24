@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("/product")
     .then((response) => response.json())
     .then((products) => displayProduct(products));
-});
+    loginStatus();
+  });
 
 function displayProduct(products) {
   const productTableBody = document.querySelector("#productTable tbody");
@@ -27,8 +28,27 @@ function addToCart(productId) {
       fetch("/cart")
         .then((response) => response.json())
         .then((cart) => {
-          window.location.href = '/cart.html';
+          window.location.href = "/cart.html";
         });
     });
 }
 
+function loginStatus() {
+  fetch('/check-login')    // 백엔드 구현: 사용자 세션 있으면 username 반납
+  .then(response => response.json())
+  .then(data => {
+      if (data.username) {
+        document.getElementById("userLog").style.display = "block";
+        document.getElementById("username").innerText = data.username;
+      }
+    });
+}
+
+function logout() {
+  fetch("/logout")
+    .then((response) => response.json())
+    .then((data) => {
+      alert(data.message);
+      showLoginForm();
+    });
+}

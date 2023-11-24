@@ -1,3 +1,69 @@
+body {
+    text-align: center;
+    padding: 10px 10px;
+}
+
+nav {
+    text-align: left;
+    overflow: hidden;
+}
+
+nav a {
+    text-decoration: none;
+    background-color: rgb(220, 205, 119);
+    color: rgb(255, 255, 255);
+    border: solid;
+    padding: 2px 3px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    float: left;
+    padding: 3px 3px;
+}
+
+#userLog {
+    display: none;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+#userLog a {
+    background-color: white;
+    border: none;
+    text-decoration: underline;
+}
+
+h1 {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 3rem;
+}
+
+label {
+    display: inline-block;
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+button {
+    font-size: 1rem;
+    padding: 0.5rem 2rem;
+    margin-top: 30px;
+    border-style: none;
+    border-radius: 2px;
+}
+
+button:hover {
+    background-color: rgb(187, 187, 187);
+}
+
 h2 {
     text-align: center;
 }
@@ -31,6 +97,9 @@ td button {
     border: 0.8px solid #b2b2b2;
     border-radius: 2px;
     width: 75px;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
 }
 
 .pmBtn {

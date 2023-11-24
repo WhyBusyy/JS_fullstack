@@ -30,6 +30,14 @@ app.use((req, res, next) => {
   next();
 });
 
+const users = [
+  { id: 11, username: "1", password: "1" },
+  { id: 1, username: "user1", password: "password1" },
+  { id: 2, username: "user2", password: "password2" },
+  { id: 3, username: "user3", password: "password3" },
+  { id: 4, username: "user4", password: "password4" },
+];
+
 const products = [
   { id: 1, name: "coke", price: 2000 },
   { id: 2, name: "soda", price: 3000 },
@@ -38,6 +46,31 @@ const products = [
 ];
 
 app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+  console.log("Session Info: ", req.session);
+});
+
+app.get("/check-login", (req, res) => {
+  const user = req.session.user;
+
+  if (user) {
+    res.json({ username: user.username });
+  } else {
+    res.status(401).json({ message: "인증되지 않은 사용자" });
+  }
+});
+
+app.get("/profile", (req, res) => {
+  const user = req.session.user;
+
+  if (user) {
+    res.json({ username: user.username, message: "프로필 정보" });
+  } else {
+    res.status(401).json({ message: "로그인이 필요합니다." });
+  }
+});
+
+app.get("/myproduct", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "product.html"));
   console.log("Session Info: ", req.session);
 });
@@ -49,13 +82,48 @@ app.get("/product", (req, res) => {
 
 app.get("/cart", (req, res) => {
   const cart = req.session.cart || [];
-  res.json(cart);
+  const user = req.session.user;
+
+  if (user) {
+    res.json(cart);
+  } else {
+    res.status(401).json({ message: "로그인이 필요합니다." });
+  }
   console.log("Session Info: ", req.session);
 });
 
 app.get("/mycart", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "cart.html"));
   console.log("Session Info: ", req.session);
+});
+
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log("세션 삭제 오류", err);
+      res.status(500).json({ message: "로그아웃 실패" });
+    } else {
+      res.json({ message: "로그아웃 성공" });
+    }
+  });
+});
+
+app.post("/login", (req, res) => {
+  // const { id, pw } = req.query;
+  const { username, password } = req.body;
+  console.log(username, password);
+
+  const user = users.find(
+    (u) => u.username === username && u.password === password
+  );
+  if (user) {
+    console.log("로그인 성공");
+    req.session.user = user;
+    res.json({ message: "로그인 성공!" });
+  } else {
+    console.log("로그인 실패");
+    res.status(401).json({ messsage: "로그인 실패!" });
+  }
 });
 
 app.post("/add-to-cart/:productId", (req, res) => {
@@ -72,7 +140,8 @@ app.post("/add-to-cart/:productId", (req, res) => {
   //있다면 수량만 추가
   if (existItem) {
     existItem.quantity += 1;
-  } else { //없다면 카트에 담기
+  } else {
+    //없다면 카트에 담기
     cart.push({
       id: product.id,
       name: product.name,
@@ -103,13 +172,13 @@ app.post("/update-quantity/:productId", (req, res) => {
 });
 
 app.post("/remove-from-cart/:productId", (req, res) => {
-    const productId = parseInt(req.params.productId);
-    const cart = req.session.cart;
-    const itemIndex = cart.findIndex((i) => i.id === productId);
-    
-    cart.splice(itemIndex, 1);
-    res.json({ message: "상품을 장바구니에서 제거했습니다.", cart });
-    console.log("Session Info: ", req.session);
+  const productId = parseInt(req.params.productId);
+  const cart = req.session.cart;
+  const itemIndex = cart.findIndex((i) => i.id === productId);
+
+  cart.splice(itemIndex, 1);
+  res.json({ message: "상품을 장바구니에서 제거했습니다.", cart });
+  console.log("Session Info: ", req.session);
 });
 
 app.listen(port, () => {

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("/cart")
+  fetch("/api/cart")
     .then((response) => {
     if (response.status === 200) {
       loginStatus();
@@ -45,7 +45,7 @@ function calculateTotalAmount(cart) {
 }
 
 function oneMore(productId) {
-  fetch(`/update-quantity/${productId}?change=1`, { method: "POST" })
+  fetch(`/api/cart/${productId}?change=1`, { method: "PUT" })
     .then((response) => response.json())
     .then((data) => {
       displayCart(data.cart); // 데이터를 콘솔에 출력하여 확인
@@ -56,7 +56,7 @@ function oneMore(productId) {
 }
 
 function removeOne(productId) {
-  fetch(`/update-quantity/${productId}?change=-1`, { method: "POST" })
+  fetch(`/api/cart/${productId}?change=-1`, { method: "PUT" })
     .then((response) => response.json())
     .then((data) => {
       displayCart(data.cart); // 데이터를 콘솔에 출력하여 확인
@@ -67,7 +67,7 @@ function removeOne(productId) {
 }
 
 function removeAll(productId) {
-  fetch(`/remove-from-cart/${productId}`, { method: "POST" })
+  fetch(`/api/cart/${productId}`, { method: "DELETE" })
     .then((response) => response.json())
     .then((data) => {
       alert(data.message);
@@ -79,7 +79,7 @@ function removeAll(productId) {
 }
 
 function loginStatus() {
-  fetch('/login')    // 백엔드 구현: 사용자 세션 있으면 username 반납
+  fetch('/api/profile')    // 백엔드 구현: 사용자 세션 있으면 username 반납
   .then(response => response.json())
   .then(data => {
       if (data.username) {
@@ -90,10 +90,9 @@ function loginStatus() {
 }
 
 function logout() {
-  fetch('/logout')
+  fetch('/api/logout')
   .then(response => response.json())
   .then(data => {
       alert(data.message);
-      showLoginForm();
   })
 }

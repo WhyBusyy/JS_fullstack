@@ -21,20 +21,25 @@ function displayProduct(products) {
 
 function addToCart(productId) {
   fetch(`/api/cart/${productId}`, { method: "POST" })
-  .then((response) => response.json())
-  .then((data) => {
-    // alert(JSON.stringify(data.cart));
-    alert(data.message);
-  });
-  fetch("../cart")
-    .then((response) => response.json())
-    .then(() => {
-      window.location.href = "/cart";
+    .then(async (response) => {
+      if (response.status === 200) {
+          return response.json();
+      } else if (response.status === 401) {
+          const data = await response.json();
+          alert(data.message);
+          if (data.redirectUrl) {
+              window.location.href = data.redirectUrl;
+          }
+        }
+    })
+    .then((data) => {
+      alert(data.message);
+      window.location.href = '/cart';
     });
 }
 
 function loginStatus() {
-  fetch("/api") // 백엔드 구현: 사용자 세션 있으면 username 반납
+  fetch("/api/profile") // 백엔드 구현: 사용자 세션 있으면 username 반납
     .then((response) => response.json())
     .then((data) => {
       if (data.username) {
@@ -45,10 +50,9 @@ function loginStatus() {
 }
 
 function logout() {
-  fetch("/logout")
+  fetch("/api/logout")
     .then((response) => response.json())
     .then((data) => {
       alert(data.message);
-      showLoginForm();
     });
 }

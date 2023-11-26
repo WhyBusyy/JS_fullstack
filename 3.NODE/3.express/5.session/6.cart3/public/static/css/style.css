@@ -91,6 +91,14 @@ td {
     text-align: center;
 }
 
+img {
+    width: 10rem;
+}
+
+#smallImage {
+    width: 4rem;
+}
+
 td button {
     background-color: rgb(231, 231, 231);
     color: rgb(51, 51, 51);

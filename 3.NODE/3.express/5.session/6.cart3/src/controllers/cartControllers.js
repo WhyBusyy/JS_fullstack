@@ -18,6 +18,7 @@ function addToCart(req, res) {
     } else {
       cart.push({
         id: product.id,
+        imgUrl: product.imgUrl,
         name: product.name,
         price: product.price,
         quantity: 1,

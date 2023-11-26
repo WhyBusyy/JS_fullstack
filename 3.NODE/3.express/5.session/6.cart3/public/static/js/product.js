@@ -11,6 +11,7 @@ function displayProduct(products) {
     const row = document.createElement("tr");
     row.innerHTML = `
         <td>${product.id}</td>
+        <td><img src="/static/images/${product.imgUrl}" alt="${product.name}"></td>
         <td>${product.name}</td>
         <td>${product.price}</td>
         <td><button onclick="addToCart(${product.id})">담기</button></td>

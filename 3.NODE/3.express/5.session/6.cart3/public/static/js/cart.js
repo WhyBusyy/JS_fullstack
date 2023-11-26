@@ -20,6 +20,7 @@ function displayCart(cart) {
     const row = document.createElement("tr");
     row.innerHTML = `
     <td>${item.id}</td>
+    <td><img src="/static/images/${item.imgUrl}" alt="${item.name}" id="smallImage"></td>
     <td>${item.name}</td>
     <td>${item.price}</td>
     <td>
@@ -34,7 +35,7 @@ function displayCart(cart) {
 
   const totalAmountRow = document.createElement("tr");
   totalAmountRow.innerHTML = `
-        <td colspan="4" id="longTd">Total:</td>
+        <td colspan="5" id="longTd">Total:</td>
         <td id="total">${calculateTotalAmount(cart)} 원</td>
       `;
   cartTableBody.appendChild(totalAmountRow);

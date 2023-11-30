@@ -38,7 +38,7 @@ const updateUser = {
   email: 'bgyu2@sesac.com'
 }
 db.run('UPDATE users SET username=?, email=? WHERE id=?',
-[updateUser.username, updateUser.email], function (err) {
+[updateUser.username, updateUser.email, updateUser.id], function (err) {
   if (err) {
     console.error("수정 실패");
     return;

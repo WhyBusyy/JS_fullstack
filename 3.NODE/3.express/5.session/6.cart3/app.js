@@ -18,6 +18,9 @@ app.use(
     secret: "abcd1234",
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      maxAge: 60000, // 1분
+    },
   })
 );
 

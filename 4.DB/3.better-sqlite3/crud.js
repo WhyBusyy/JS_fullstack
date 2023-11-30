@@ -19,8 +19,9 @@ const insertResult =  insert.run(newUser.username, newUser.email);
 console.log('추가된 사용자: ', insertResult.lastInsertRowid);
 
 const userId = 1;
-const user = db.prepare('SELECT * FROM users WHERE id = ?').get(userId);
-console.log(`사용자 ${userId}: ${user.username}`);
+const user = db.prepare('SELECT * FROM users WHERE id = ?')
+const result = user.get(userId);
+console.log(`사용자 ${userId}: ${result?.username}`); // ?는 없을떄는 참조하지 않음..
 
 
 const updateUser =  {

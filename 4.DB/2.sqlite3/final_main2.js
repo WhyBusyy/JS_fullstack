@@ -1,7 +1,7 @@
 const database = require('./final_database2')
 
 async function main() {
-  db = new database('mydb4.db');
+  db = new database(':memory:');
 
   try {
   await db.createTable();

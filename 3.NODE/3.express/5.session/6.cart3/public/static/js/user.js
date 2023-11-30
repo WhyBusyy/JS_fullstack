@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => checkLoginStatus());
 function login() {
   const username = document.getElementById("ID").value;
   const password = document.getElementById("PW").value;
+  const rememberMeCheckbox = document.getElementById("autoLoginBox");
 
   fetch("/api/login", {
     method: "POST",
@@ -21,6 +22,9 @@ function login() {
     .then((data) => {
       console.log(data.message);
       alert(data.message);
+      if (rememberMeCheckbox.checked) {
+        autoLogin(username, password);
+      }
       checkLoginStatus();
     })
     .catch((error) => {
@@ -29,31 +33,57 @@ function login() {
     });
 }
 
+function autoLogin(username, password) {
+  console.log("자동로그인 실행");
+
+  fetch("/api/auto_login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, password }),
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error("자동 로그인 실패");
+      }
+    })
+    .then((data) => {
+      console.log(data.message);
+    })
+    .catch((error) => {
+      console.log("자동 로그인 실패: ", error);
+      alert("자동 로그인 실패");
+    });
+}
+
 function logout() {
-  fetch('/api/logout')
-  .then(response => response.json())
-  .then(data => {
+  fetch("/api/logout")
+    .then((response) => response.json())
+    .then((data) => {
       alert(data.message);
       showLoginForm();
-  })
+    });
 }
 
 function checkLoginStatus() {
-  fetch('/api/profile')    // 백엔드 구현: 사용자 세션 있으면 username 반납
-  .then(response => response.json())
-  .then(data => {
+  fetch("/api/profile") // 백엔드 구현: 사용자 세션 있으면 username 반납
+    .then((response) => response.json())
+    .then((data) => {
       if (data.username) {
-          showProfile(data.username);
-          console.log('사용자 이름:', data.username);
+        showProfile(data.username);
+        console.log("사용자 이름:", data.username);
       } else {
-          showLoginForm();
-          console.log('로그인된 사용자 없음')
+        showLoginForm();
+        console.log("로그인된 사용자 없음");
       }
-  })
-  .catch(error => {
-      console.error('로그인 상태 확인 오류:', error);
+    })
+    .catch((error) => {
+      console.error("로그인 상태 확인 오류:", error);
       showLoginForm();
-  })
+    });
 }
 
 function showProfile(username) {

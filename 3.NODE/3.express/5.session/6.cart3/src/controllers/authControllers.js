@@ -24,6 +24,20 @@ function getProfile(req, res) {
     }
   };
 
+  function autoLogin(req, res) {
+    const { username, password } = req.body;
+    const expirationTime = new Date(Date.now() + 600000);
+    const user = users.find(
+      (u) => u.username === username && u.password === password
+    );
+    if (user) {
+      res.cookie('RememberMe', user, { expires: expirationTime });
+      res.json({ message: "10분 간 자동 로그인" });
+    } else {
+      res.status(401).json({ messsage: "자동 로그인 등록 실패!" });
+    }
+  };
+
   function logout(req, res) {
     req.session.destroy((err) => {
       if (err) {
@@ -35,4 +49,4 @@ function getProfile(req, res) {
     });
   };
 
-  module.exports = { login, logout, getProfile };
+  module.exports = { login, autoLogin, logout, getProfile };

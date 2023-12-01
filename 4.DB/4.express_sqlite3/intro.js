@@ -9,7 +9,7 @@ const db = new sqlite3.Database(dbFile);
 
 function createTable_database() {
   return new Promise((resolve, reject) => {
-    const sql = fs.readFileSync("init_database.sql", "utf8");
+    const sql = fs.readFileSync("create_database.sql", "utf8");
 
     db.exec(sql, (err) => {
       if (err) {

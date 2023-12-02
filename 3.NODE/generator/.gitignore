@@ -1,1 +1,9 @@
 node_modules
+.gitignore
+Order.csv
+User.csv
+Orderitem.csv
+Store.csv
+item.csv
+.DS_Store
+

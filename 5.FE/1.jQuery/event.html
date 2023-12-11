@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        #myDiv {
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="myDiv"><span id="displayText">Hover me</span></div>
+    <button id="changeColorBtn">Change Color</button>
+    <script>
+        $(document).ready(function () {
+            let myDiv = $("#myDiv");
+            let displayText = $('#displayText');
+
+            $('#changeColorBtn').click(function () {
+                let randomColor = getRandomColor();
+                $("#myDiv").css('background-color', randomColor);
+            })
+
+            function getRandomColor() {
+                let letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+
+            myDiv.hover(
+                function () {
+                    let currentColor = myDiv.css('background-color');
+                    displayText.text('Current color : ' + currentColor);
+                },
+                function () {
+                    displayText.text('Hover me');
+                    displayText.css('color', 'white');
+                })
+        });
+    </script>
+</body>
+
+</html>

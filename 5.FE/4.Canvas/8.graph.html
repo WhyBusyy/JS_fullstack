@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캔바스</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="barGraphCanvas" width="400" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('barGraphCanvas');
+        const cxt = canvas.getContext('2d');
+
+        const graphData = {
+            A: 10,
+            B: 20,
+            C: 40,
+            D: 60,
+            E: 80
+        }
+
+        // drawBarGraph(graphData);
+        drawLineGraph(graphData);
+
+        function drawBarGraph(data) {
+            const barWidth = 30;
+            let startX = 20;
+
+            for (const key in data) {
+                const barHeight = data[key];
+
+                cxt.fillStyle = 'red';
+                cxt.fillRect(startX, 200 - barHeight, barWidth, barHeight);
+
+                cxt.fillStyle = 'black';
+                cxt.fillText(key, startX + barWidth / 2, 200 + 10);
+
+                startX += 50; // 간격 조정
+            }
+        }
+
+        cxt.beginPath();
+
+        function drawLineGraph(data) {
+            cxt.strokeStyle = "#00FF00";
+            cxt.lineWidth = 3;
+            const keys = Object.keys(data);
+
+            const startX = 20;
+            const startY = 200 - data[keys[0]];
+
+            cxt.moveTo(startX, startY);
+
+            for (let i = 0; i < keys.length; i++) {
+                const key = keys[i];
+                const x = startX + i * 50;
+                const y = 200 - data[key];
+                cxt.lineTo(x, y);
+
+                //x축에 텍스트쓰기
+                cxt.fillStyle = 'black';
+                cxt.fillText(key, x - 10, 200);
+            }
+            cxt.stroke(); // 화면에 렌더링
+        }
+
+        cxt.closePath();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캔바스</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="textCanvas" width="400" height="500"></canvas>
+    <script>
+        const canvas = document.getElementById('textCanvas');
+        const cxt = canvas.getContext('2d');
+
+        const player = {
+            x: 150,
+            y: canvas.height - 50,
+            speed: 15,
+        }
+
+        const enemy = {
+            x: 100,
+            y: 0,
+            speed: 1,
+        }
+
+        const image1 = new Image();
+        image1.src = 'bee.png';
+        image1.onload = function() {
+            draw();
+        }
+
+        const image2 = new Image();
+        image2.src = 'wasp.png';
+        image2.onload = function() {
+            draw();
+        }
+
+
+
+        function draw() {
+            cxt.clearRect(0,0,canvas.width,canvas.height);
+            cxt.drawImage(image1, player.x, player.y, 50, 50);
+            cxt.drawImage(image2, enemy.x, enemy.y, 25, 25);
+
+            enemy.y += enemy.speed;
+            if(enemy.y > canvas.height) {
+                enemy.y = 0;
+                enemy.x = Math.random() * (canvas.width - 25);
+            }
+
+            requestAnimationFrame(draw); // 반복 애니메이션 수행
+        }
+
+        draw(); //최초 애니메이션 수행
+
+        //키보드 이벤트 처리
+        window.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowLeft':
+                if(player.x > 0) {
+                player.x -= player.speed;
+                }
+                break;
+                case 'ArrowRight':
+                if(player.x < canvas.width - 50) {
+                player.x += player.speed;
+                }
+                break;
+                case 'ArrowUp':
+                if(player.y > 5) {
+                player.y -= player.speed;
+                break;
+                }
+                case 'ArrowDown':
+                if(player.y < canvas.height - 50) {
+                player.y += player.speed;
+                }
+                break;
+            }
+        })
+    </script>
+</body>
+
+</html>

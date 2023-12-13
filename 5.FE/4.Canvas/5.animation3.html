@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캔바스</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="textCanvas" width="400" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('textCanvas');
+        const cxt = canvas.getContext('2d');
+
+        const ball = {
+            x: 300,
+            y: 200,
+            radius: 20,
+            dx: 5,
+            dy: 5, // 초기 속도
+        }
+
+        // 애니메이션 - 반복적으로 변경된 좌표에 내용을 계속 출력..
+
+        function drawBall() {
+            cxt.clearRect(0, 0, canvas.width, canvas.height);
+
+            cxt.beginPath();
+            cxt.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            cxt.fillStyle = '#0095DD'
+            cxt.fill();
+            cxt.closePath();
+
+
+            // 공을 이동
+            ball.x += ball.dx;
+            ball.y += ball.dy;
+
+            //캔버스의 경계에 도착하면 공을 튕기는 효과
+            if(ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+                ball.dx = -ball.dx;
+            }
+            
+            if(ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+                ball.dy = -ball.dy;
+            }
+
+            requestAnimationFrame(drawBall);
+        }
+
+        drawBall();
+
+    </script>
+</body>
+
+</html>

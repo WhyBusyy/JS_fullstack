@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캔바스</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="textCanvas" width="400" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('textCanvas');
+        const cxt = canvas.getContext('2d');
+
+        // 애니메이션 - 반복적으로 변경된 좌표에 내용을 계속 출력..
+        let x = 50;
+        let y = 50;
+
+        function draw() {
+            // 도화기 매번 초기화(clear)
+            cxt.clearRect(0, 0, canvas.width, canvas.height);
+
+            //박스 그리기
+            cxt.fillStyle = "#FF0000";
+            cxt.fillRect(x, y, 50, 50);
+
+            x += 5;
+            y += 5;
+
+            if (x > canvas.width) {
+                x = 0;
+            }
+
+            if (y > canvas.width) {
+                y = 0;
+            }
+
+            if (x <= canvas.width - 50) {
+                requestAnimationFrame(draw);
+            }
+        }
+
+        draw();
+    </script>
+</body>
+
+</html>

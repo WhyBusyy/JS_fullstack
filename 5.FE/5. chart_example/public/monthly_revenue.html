@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>월간 매출액</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>month</th>
+        <th>revenue</th>
+      </tr>
+    </thead>
+    <tbody id="dataTable">
+      <tr></tr>
+    </tbody>
+    <canvas id="chart"></canvas>
+  </table>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("/api/chart-data")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          let ctx = document.getElementById('chart').getContext('2d');
+          let barGraph = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: data.labels,
+              datasets: [
+                {
+                  label: 'revenues',
+                  data: data.revenues,
+                  borderColor: 'rgba(0, 123, 255, 1)',
+                  backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                  fill: true
+                }
+              ]
+            },
+            options: {}
+          })
+          displayData(data.rows)
+        });
+    });
+
+    function displayData(data) {
+      const tableBody = document.getElementById("dataTable");
+      data.forEach((e) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+        <td>${e.YearMonth}</td>
+        <td>${e.MonthlyRevenue}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+  </script>
+</body>
+
+</html>

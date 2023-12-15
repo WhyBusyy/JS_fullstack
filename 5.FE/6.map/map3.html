@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+
+<body>
+    <div>
+        <label for="start">출발지(lat, lon):</label>
+        <input type="text" id="start">
+        <br>
+        <label for="end">도착지(lat, lon):</label>
+        <input type="text" id="end">
+        <br>
+        <button onclick="findRoute()">경로찾기</button>
+    </div>
+    <div id="map" style="height: 700px">
+    </div>
+    <script>
+        var map = L.map('map').setView([37.51854, 126.93751], 16); //지도 시작 위치[위도,경도], 배율 설정
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        function findRoute() {
+            var startInput = document.getElementById('start').value
+            var endInput = document.getElementById('end').value
+
+            if(!startInput || !endInput){
+                alert('출발지와 도착지 모두 입력해주세요.')
+                return;
+            }
+
+            // 입력값 파싱
+            var startCoord = startInput.split(',').map((coord) => parseFloat(coord.trim()));
+            var endCoord = endInput.split(',').map((coord) => parseFloat(coord.trim()));
+
+            // 경로 표시
+            var route = L.polyline([startCoord, endCoord], { color: 'blue'}).addTo(map);
+            map.fitBounds(route.getBounds());
+
+        }
+
+    </script>
+</body>
+
+</html>

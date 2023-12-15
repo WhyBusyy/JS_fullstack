@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Leaflet Routing Machine Example</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="leaflet-routing-machine.css" />
+    <style>
+        .map {
+            position: absolute;
+            width: 95%;
+            height: 85%;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <label for="start">출발지(lat, lon):</label>
+        <input type="text" id="start" placeholder="예: 63빌딩">
+        <br>
+        <label for="end">도착지(lat, lon):</label>
+        <input type="text" id="end" placeholder="예: 경복궁">
+        <br>
+        <button onclick="findRoute()">경로찾기</button>
+    </div>
+    <div id="map" class="map"></div>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script>
+        var map = L.map('map');
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        function findRoute() {
+            var startInput = document.getElementById('start').value
+            var endInput = document.getElementById('end').value
+
+            if (!startInput || !endInput) {
+                alert('출발지와 도착지 모두 입력해주세요.')
+                return;
+            }
+
+            // 입력값 기반으로 쿼리..출발지도 쿼리, 목적지도 쿼리
+            fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + startInput)
+                .then((response) => response.json())
+                .then((data) => {
+                    var startCoord = [data[0].lat, data[0].lon]
+                    return fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + endInput)
+                        .then((response) => response.json())
+                        .then((data) => {
+                            var endCoord = [data[0].lat, data[0].lon]
+                            // 마커 추가
+                            L.marker(startCoord).addTo(map).bindPopup('출발지: ' + startInput).openPopup();
+                            L.marker(endCoord).addTo(map).bindPopup('도착지: ' + endInput).openPopup();
+
+                            // 경로 표시
+                            L.Routing.control({
+                                waypoints: [
+                                    L.latLng(startCoord),
+                                    L.latLng(endCoord)
+                                ],
+                                routeWhileDragging: true
+                            }).addTo(map);
+                        })
+                })
+        }
+    </script>
+</body>
+
+</html>

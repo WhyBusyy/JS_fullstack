@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+<script src="randomcode.js"></script>
+
+<body>
+    <h1>회원가입</h1>
+    <div id="emailIput">
+        <form >
+            <label for="mailAddress">이메일:</label>
+            <input type="email" name="email" id='mailAddress'>
+            <button type="button" onclick="sendRandomCode()">인증코드발송</button>
+        </form>
+    </div>
+    <div id="codeInput" style="display: none;">
+        <form>
+            <p>인증 코드가 발송되었습니다.</p>
+            <label>인증 코드:</label>
+            <input type="text" id='certificationCode'>
+            <button type="button" onclick="checkCode()">인증코드 확인</button>
+        </form>
+        <p><span id="done"></span></p>
+    </div>
+</body>
+
+</html>

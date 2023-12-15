@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <h2> 월간 매출액 </h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>month</th>
+                <th>revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in rows %}
+            <tr>
+                <td class="month">{{data.YearMonth}}</td>
+                <td class="revenue">{{data.MonthlyRevenue}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <canvas id="chart"></canvas>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // let month = document.getElementsByClassName('month');
+        // let labels = [];
+        // for (let i = 0; i < month.length; i++) {
+        //     labels.push(month[i].textContent);
+        // }
+
+        // let revenue = document.getElementsByClassName('revenue');
+        // let data = [];
+        // for (let i = 0; i < revenue.length; i++) {
+        //     data.push(revenue[i].textContent);
+        // }
+
+        var labels = {{ labels | safe }};
+        var revenues = {{ revenues | safe }};
+
+        let ctx = document.getElementById('chart').getContext('2d');
+        let barGraph = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'revenues',
+                        data: revenues,
+                        borderColor: 'rgba(0, 123, 255, 1)',
+                        backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                        fill: true
+                    }
+                ]
+            },
+            options: {}
+        })
+    </script>
+</body>
+
+</html>
